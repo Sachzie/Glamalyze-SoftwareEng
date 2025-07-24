@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Glamalyze - Scan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #fdd1eb;
+    }
+
+    nav {
+      background-color: transparent;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+      font-weight: 600;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1e1e1e;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+    }
+
+    nav a.active {
+      background-color: #ffd1e9;
+      color: #000;
+    }
+
+    .app-window {
+      background-color: #7b60b6;
+      width: 90%;
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      border: 3px solid #000;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .title-bar {
+      background-color: #fdb8e1;
+      height: 30px;
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      font-size: 20px;
+      justify-content: flex-start;
+      font-weight: bold;
+    }
+
+   .video-container {
+  background-color: white;
+  width: 300px;              /* ⬅️ Fixed smaller width */
+  height: 180px;
+  margin: 1rem auto;         /* ⬅️ Centers the box horizontally */
+  border: 3px solid black;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;        /* Optional: slightly rounded corners */
+}
+
+    .rec-dot {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rec-dot span {
+      width: 8px;
+      height: 8px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .rec-dot label {
+      color: red;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .video-placeholder {
+      width: 70px;
+      height: 70px;
+      background: black;
+      border-radius: 50%;
+    }
+
+    .side-controls {
+      position: absolute;
+      right: 10px;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .side-controls div {
+      background-color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border: 1px solid #ccc;
+    }
+
+    .camera-btn,
+    .settings-btn,
+    .star-btn {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: black;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .camera-btn {
+      bottom: 90px;
+      right: 30px;
+    }
+
+    .settings-btn {
+      top: 75px;
+      left: 10px;
+    }
+
+    .star-btn {
+      top: 150px;
+      left: 10px;
+    }
+
+    .makeup-options {
+      display: flex;
+      justify-content: space-around;
+      background: #f3e9ff;
+      padding: 1rem;
+      border-radius: 20px;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .makeup-option {
+      text-align: center;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .makeup-option:hover {
+      transform: scale(1.1);
+    }
+
+    .makeup-option img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .makeup-option p {
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    @media (max-width: 600px) {
+      .makeup-options {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background-color: #fff; border-bottom: 1px solid #eee;">
+  
+      <h1 style="margin: 0; font-size: 1.5rem; color: #7d55c7; font-weight: bold;">Glamalyze</h1>
+      <p style="margin: 0; font-size: 0.85rem; color: #777;">MAKEUP ANALYSIS</p>
+    </div>
+  </div>
+  <div style="display: flex; gap: 1rem;">
+    <!-- <a href="login.html" style="text-decoration: none; color: #7d55c7; font-weight: 500;">Login</a> -->
+    <a href="index.html" style="text-decoration: none; color: #7d55c7; font-weight: 500;">Home</a>
+  </div>
+</header>
+
+  <!-- App Window -->
+  <div class="app-window">
+    <div class="title-bar">メ口—</div>
+
+    <div class="settings-btn">⚙️</div>
+    <div class="star-btn">★</div>
+
+    <div class="video-container">
+      <div class="video-placeholder"></div>
+      <div class="rec-dot">
+        <span></span>
+        <label>REC</label>
+      </div>
+    </div>
+
+    <div class="side-controls">
+      <div title="Audio">🔊</div>
+      <div title="Record">🎥</div>
+      <div title="Stop">⏹️</div>
+    </div>
+
+    <div class="camera-btn" title="Take Snapshot">📷</div>
+
+<!-- Makeup Options -->
+<div class="makeup-options">
+  <div class="makeup-option">
+    <img src="https://img.icons8.com/color/96/foundation-makeup.png" alt="Face">
+    <p>Face</p>
+  </div>
+  <div class="makeup-option">
+    <img src="https://img.icons8.com/color/96/lipstick.png" alt="Lipstick">
+    <p>Lipstick</p>
+  </div>
+  <div class="makeup-option">
+    <img src="https://img.icons8.com/color/96/mascara.png" alt="Eye">
+    <p>Eye</p>
+  </div>
+  <div class="makeup-option">
+    <img src="https://img.icons8.com/color/96/powder.png" alt="Blush">
+    <p>Blush</p>
+  </div>
+  <div class="makeup-option">
+  <img src="https://img.icons8.com/fluency/96/eyebrow.png" alt="Brows">
+  <p>Brows</p>
+</div>
+
+
+</body>
+</html>
