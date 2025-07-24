@@ -5,181 +5,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Glamalyze</title>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Josefin Sans', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(to bottom right, #fde2ff, #e0c3fc);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: white;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .logo img {
-      width: 40px;
-    }
-
-    .logo h1 {
-      color: #7a49f5;
-      font-size: 1.8rem;
-      font-weight: 700;
-    }
-
-    .logo span {
-      display: block;
-      font-size: 0.8rem;
-      color: #555;
-      font-weight: 400;
-    }
-
-    .auth-buttons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .auth-buttons a {
-      text-decoration: none;
-      color: #7a49f5;
-      font-weight: 600;
-      border: 1px solid #7a49f5;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .auth-buttons a:hover {
-      background-color: #7a49f5;
-      color: white;
-    }
-
-    main {
-      text-align: center;
-      margin-top: 5rem;
-    }
-
-    .upload-container {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      width: 300px;
-    }
-
-    .upload-container img {
-      width: 100px;
-      margin-bottom: 1rem;
-    }
-
-    .upload-container h2 {
-      color: #7a49f5;
-      font-weight: 700;
-      font-size: 1.5rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .upload-container p {
-      color: #555;
-      margin-bottom: 1.5rem;
-    }
-
-    .upload-icon {
-      background-color: #fde2ff;
-      border-radius: 50%;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .upload-btn,
-    .scan-btn {
-      background-color: #f6a3ff;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      color: white;
-      font-weight: 600;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .upload-btn:hover,
-    .scan-btn:hover {
-      background-color: #e67de8;
-    }
-
-    input[type="file"] {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <div class="logo">
-      <h1>Glamalyze</h1>
-      <span>MAKEUP ANALYSIS</span>
-    </div>
-    <div class="auth-buttons">
-      <a href="scan.html">Scan</a>
-      <a href="login.html">Register</a>
+  <div class="logo">
+    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.6rem;">
+      <h1 style="color: #7a49f5; font-size: 1.8rem; font-weight: 700;">Glamalyze</h1>
+      <span style="font-size: 0.8rem; color: #555; font-weight: 400;">MAKEUP ANALYSIS</span>
+    </a>
+  </div>
+    <div class="auth-buttons" id="authButtons">
+      <a href="#" onclick="openModal()" id="loginLink">Login / Register</a>
+      <button onclick="logout()" id="logoutBtn" style="display: none;">Logout</button>
     </div>
   </header>
 
-  <main>
-    <div class="upload-container">
-      <img class="upload-icon" src="https://img.icons8.com/fluency/96/user-female-circle.png" alt="Upload" />
-      <h2>Welcome to Glamalyze!</h2>
-      <p>Please upload a selfie or click scan to begin your analysis.</p>
+  <!-- Notification Alert -->
+  <div id="notification" class="notification" style="display: none;"></div>
 
-      <div class="btn-group">
-        <!-- Button to trigger file input -->
-        <button class="upload-btn" onclick="document.getElementById('selfieInput').click();">Add a Selfie</button>
-        
-        <!-- Hidden file input -->
-        <input type="file" id="selfieInput" accept="image/*" onchange="handleSelfieUpload(this)" />
-        
-        <!-- Scan button -->
-        <a href="scan.html" class="scan-btn">Scan in Real Time</a>
-      </div>
+  <!-- Logged-in User Info -->
+  <div id="userInfo" class="user-info" style="
+    display: none;
+    position: fixed;
+    bottom: 15px;
+    left: 20px;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: rgba(0,0,0,0.6);
+    padding: 8px 12px;
+    border-radius: 5px;
+    z-index: 999;
+  ">
+    Logged in as: <span id="userEmail" style="font-weight: bold;"></span>
+  </div>
+
+<main>
+<!-- 1st Container: Welcome -->
+<div class="onboarding-container" id="intro-container">
+  <img src="img/Glamalyze.png" alt="Glamalyze Icon" style="width: 100px; margin-bottom: 1rem;" />
+  <h2 style="color: #fff; font-size: 1.6rem; margin-bottom: 0.5rem;">Glamalyze</h2>
+  <p style="color: #fff; font-weight: 600; margin-bottom: 2rem;">AI BEAUTY, PERSONALIZED FOR YOU.</p>
+  <button onclick="nextStep()" class="nav-btn">NEXT</button>
+</div>
+
+<!-- 2nd Container: Instructions -->
+<div class="onboarding-container" id="instructions-container" style="display: none;">
+  <img src="img/Glamalyze.png" alt="Instructions Icon" style="width: 100px; margin-bottom: 1rem;" />
+  <h2 style="color: #fff; font-size: 1.6rem; margin-bottom: 0.5rem;">USING GLAMALYZE IS EASY.</h2>
+  <p style="color: #fff; font-weight: 500;">Close any active video or streaming apps.<br />Re-open Glamalyze.</p>
+  <div style="margin-top: 2rem;">
+    <button onclick="prevStep()" class="nav-btn">PREVIOUS</button>
+    <button onclick="finishOnboarding()" class="nav-btn">FINISH</button>
+  </div>
+</div>
+
+  <!-- 3rd Container: Upload -->
+  <div class="upload-container" id="upload-container" style="display: none;">
+    <img class="upload-icon" src="https://img.icons8.com/fluency/96/user-female-circle.png" alt="Upload" />
+    <h2>Welcome to Glamalyze!</h2>
+    <p>Please upload a selfie or click scan to begin your analysis.</p>
+
+    <div class="btn-group">
+      <button class="upload-btn" onclick="document.getElementById('selfieInput').click();">Add a Selfie</button>
+      <input type="file" id="selfieInput" accept="image/*" onchange="handleSelfieUpload(this)" />
+      <a href="scan.html" class="scan-btn">Scan in Real Time</a>
     </div>
-  </main>
+  </div>
+</main>
 
-  <script>
-    function handleSelfieUpload(input) {
-      if (input.files && input.files[0]) {
-        alert("Selfie uploaded: " + input.files[0].name);
-        // You can redirect or process the file here
-      }
-    }
-  </script>
+<!-- Login/Register Modal -->
+<div id="authModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+
+    <!-- Tabs -->
+    <div class="modal-tabs">
+      <button id="loginTab" class="active" onclick="switchTab('login')">Login</button>
+      <button id="registerTab" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <input type="text" id="loginEmail" placeholder="Email" required />
+      <div class="password-field">
+        <input type="password" placeholder="Password" id="loginPassword" required />
+        <span class="toggle-password" onclick="togglePassword('loginPassword')">👁️</span>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" id="registerEmail" placeholder="Email" required />
+      <div class="password-field">
+        <input type="password" placeholder="Password" id="registerPassword" required />
+        <span class="toggle-password" onclick="togglePassword('registerPassword')">👁️</span>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</div>
+
+<script src="index.js"></script>
+
 </body>
 </html>
