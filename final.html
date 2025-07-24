@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Glamalyze - Final Look</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    body {
+      background-color: #fdd1eb;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    header {
+      background: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    header h1 {
+      color: #7d55c7;
+      font-size: 1.5rem;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #7d55c7;
+      font-weight: 500;
+      margin-left: 1rem;
+    }
+
+    .final-look-container {
+      margin-top: 3rem;
+    }
+
+    .final-look-container h2 {
+      color: #7d55c7;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .look-description {
+      color: #333;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .fake-look {
+      max-width: 300px;
+      width: 100%;
+      border-radius: 16px;
+      border: 3px solid #7d55c7;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.6rem 1.5rem;
+      background-color: #7d55c7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .back-btn:hover {
+      background-color: #5e3aa0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Glamalyze</h1>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </div>
+  </header>
+
+ <div class="final-look-container">
+  <h2>Your Final Look ✨</h2>
+  <p class="look-description">Here's a preview of your glam look based on your selections. Ready to slay!</p>
+  <img src="img/face.jpg" alt="Final Look" class="fake-look" />
+  <br />
+  <a class="back-btn" href="scan.html">Try Again</a>
+</div>
+
+
+</body>
+</html>

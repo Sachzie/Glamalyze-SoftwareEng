@@ -10,32 +10,40 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Josefin Sans', sans-serif;
     }
 
     body {
       background-color: #fdd1eb;
     }
 
-    nav {
-      background-color: transparent;
-      padding: 1rem 2rem;
+    header {
       display: flex;
-      justify-content: flex-end;
-      gap: 2rem;
-      font-weight: 600;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
     }
 
-    nav a {
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #7d55c7;
+      font-weight: bold;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    header a {
       text-decoration: none;
-      color: #1e1e1e;
-      padding: 0.4rem 1rem;
-      border-radius: 6px;
-    }
-
-    nav a.active {
-      background-color: #ffd1e9;
-      color: #000;
+      color: #7d55c7;
+      font-weight: 500;
+      margin-left: 1rem;
     }
 
     .app-window {
@@ -61,18 +69,18 @@
       font-weight: bold;
     }
 
-   .video-container {
-  background-color: white;
-  width: 300px;              /* ⬅️ Fixed smaller width */
-  height: 180px;
-  margin: 1rem auto;         /* ⬅️ Centers the box horizontally */
-  border: 3px solid black;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;        /* Optional: slightly rounded corners */
-}
+    .video-container {
+      background-color: white;
+      width: 300px;
+      height: 180px;
+      margin: 1rem auto;
+      border: 3px solid black;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
 
     .rec-dot {
       position: absolute;
@@ -186,6 +194,33 @@
       margin-top: 0.3rem;
     }
 
+    .shades-container {
+      margin-top: 1.5rem;
+      text-align: center;
+      background: #fff0fa;
+      padding: 1rem;
+      border-radius: 16px;
+    }
+
+    .shades-container h3 {
+      margin-bottom: 1rem;
+      color: #7b60b6;
+    }
+
+    .shade-swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 8px;
+      border: 2px solid #aaa;
+      cursor: pointer;
+    }
+
+    .shade-swatch:hover {
+      border-color: #000;
+    }
+
     @media (max-width: 600px) {
       .makeup-options {
         flex-direction: column;
@@ -196,19 +231,16 @@
 </head>
 <body>
 
-  <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background-color: #fff; border-bottom: 1px solid #eee;">
-  
-      <h1 style="margin: 0; font-size: 1.5rem; color: #7d55c7; font-weight: bold;">Glamalyze</h1>
-      <p style="margin: 0; font-size: 0.85rem; color: #777;">MAKEUP ANALYSIS</p>
+  <header>
+    <div>
+      <h1>Glamalyze</h1>
+      <p>MAKEUP ANALYSIS</p>
     </div>
-  </div>
-  <div style="display: flex; gap: 1rem;">
-    <!-- <a href="login.html" style="text-decoration: none; color: #7d55c7; font-weight: 500;">Login</a> -->
-    <a href="index.html" style="text-decoration: none; color: #7d55c7; font-weight: 500;">Home</a>
-  </div>
-</header>
+    <div>
+      <a href="index.html">Home</a>
+    </div>
+  </header>
 
-  <!-- App Window -->
   <div class="app-window">
     <div class="title-bar">メ口—</div>
 
@@ -231,29 +263,88 @@
 
     <div class="camera-btn" title="Take Snapshot">📷</div>
 
-<!-- Makeup Options -->
-<div class="makeup-options">
-  <div class="makeup-option">
-    <img src="https://img.icons8.com/color/96/foundation-makeup.png" alt="Face">
-    <p>Face</p>
+    <!-- Makeup Options -->
+    <div class="makeup-options">
+      <div class="makeup-option" onclick="showShades('foundation')">
+        <img src="https://img.icons8.com/color/96/foundation-makeup.png" alt="Face">
+        <p>Face</p>
+      </div>
+      <div class="makeup-option" onclick="showShades('lipstick')">
+        <img src="https://img.icons8.com/color/96/lipstick.png" alt="Lipstick">
+        <p>Lipstick</p>
+      </div>
+      <div class="makeup-option" onclick="showShades('eye')">
+        <img src="https://img.icons8.com/color/96/mascara.png" alt="Eye">
+        <p>Eye</p>
+      </div>
+      <div class="makeup-option" onclick="showShades('blush')">
+        <img src="https://img.icons8.com/color/96/powder.png" alt="Blush">
+        <p>Blush</p>
+      </div>
+      <div class="makeup-option" onclick="showShades('brows')">
+        <img src="https://img.icons8.com/fluency/96/eyebrow.png" alt="Brows">
+        <p>Brows</p>
+      </div>
+    </div>
+    <!-- Shades Result -->
+    <div id="shades-container" class="shades-container"></div>
   </div>
-  <div class="makeup-option">
-    <img src="https://img.icons8.com/color/96/lipstick.png" alt="Lipstick">
-    <p>Lipstick</p>
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="final.html">
+      <button style="padding: 0.7rem 2rem; background-color: #7d55c7; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+        View Final Look
+      </button>
+    </a>
   </div>
-  <div class="makeup-option">
-    <img src="https://img.icons8.com/color/96/mascara.png" alt="Eye">
-    <p>Eye</p>
-  </div>
-  <div class="makeup-option">
-    <img src="https://img.icons8.com/color/96/powder.png" alt="Blush">
-    <p>Blush</p>
-  </div>
-  <div class="makeup-option">
-  <img src="https://img.icons8.com/fluency/96/eyebrow.png" alt="Brows">
-  <p>Brows</p>
-</div>
+  <script>
+    function showShades(type) {
+      const container = document.getElementById('shades-container');
+      let html = '';
 
+      if (type === 'foundation') {
+        html = `
+          <h3>Choose Your Foundation Shade:</h3>
+          <div class="shade-swatch" style="background:#f5d6c6;"></div>
+          <div class="shade-swatch" style="background:#e4b7a0;"></div>
+          <div class="shade-swatch" style="background:#c49e82;"></div>
+        `;
+      } else if (type === 'lipstick') {
+        html = `
+          <h3>Choose Your Lipstick Shade:</h3>
+          <div class="shade-swatch" style="background:#d81b60;"></div>
+          <div class="shade-swatch" style="background:#ec407a;"></div>
+          <div class="shade-swatch" style="background:#f8bbd0;"></div>
+        `;
+      } else if (type === 'eye') {
+        html = `
+          <h3>Choose Your Eye Shadow:</h3>
+          <div class="shade-swatch" style="background:#5e35b1;"></div>
+          <div class="shade-swatch" style="background:#7e57c2;"></div>
+          <div class="shade-swatch" style="background:#d1c4e9;"></div>
+        `;
+      } else if (type === 'blush') {
+        html = `
+          <h3>Choose Your Blush:</h3>
+          <div class="shade-swatch" style="background:#ff8a80;"></div>
+          <div class="shade-swatch" style="background:#f48fb1;"></div>
+          <div class="shade-swatch" style="background:#fce4ec;"></div>
+        `;
+      } else if (type === 'brows') {
+        html = `
+          <h3>Choose Your Brow Color:</h3>
+          <div class="shade-swatch" style="background:#4e342e;"></div>
+          <div class="shade-swatch" style="background:#6d4c41;"></div>
+          <div class="shade-swatch" style="background:#a1887f;"></div>
+        `;
+      }
+
+      container.innerHTML = html;
+   }
+
+    function goToFinalLook() {
+      window.location.href = "final.html";
+    }
+  </script>
 
 </body>
 </html>
